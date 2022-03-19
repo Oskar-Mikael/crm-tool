@@ -17,10 +17,18 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->unsignedInteger('company_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('position_title')->nullable();
+            $table->string('image')->nullable();
+            $table->tinyInteger('is_admin')->default(0);
+            $table->tinyInteger('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
