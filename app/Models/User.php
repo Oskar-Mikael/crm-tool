@@ -63,6 +63,11 @@ class User extends Authenticatable
 
     public function completedTasks()
     {
-        return $this->hasMany(Task::class, 'assigned_user_id')->where('status', 2);
+        return $this->hasMany(Task::class, 'assigned_user_id')->where('status_id', 3);
+    }
+
+    public function ongoingTasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_user_id')->where('status_id', 2);
     }
 }

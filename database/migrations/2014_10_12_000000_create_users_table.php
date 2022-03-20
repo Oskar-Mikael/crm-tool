@@ -17,9 +17,9 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->unsignedInteger('company_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedInteger('company_id');
             $table->string('phone')->nullable();
             $table->string('position_title')->nullable();
             $table->string('image')->nullable();
@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->index('company_id');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('company_id');
+            $table->unsignedInteger('company_id')->nullable();
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
@@ -36,10 +36,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('created_by_id')->references('id')->on('users');
-            $table->foreign('modified_by_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('assigned_user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->index('created_by_id');
+            $table->index('modified_by_id');
+            $table->index('assigned_user_id');
+            $table->index('company_id');
         });
     }
 

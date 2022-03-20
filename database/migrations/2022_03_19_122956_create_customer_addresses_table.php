@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('customer_addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('customer_id');
+            $table->unsignedInteger('customer_id')->nullable();
             $table->string('street')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('zipcode')->nullable();
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->index('customer_id');
         });
     }
 

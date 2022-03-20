@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('zipcode')->nullable();
+            $table->integer('setup_complete');
             $table->timestamps();
         });
     }

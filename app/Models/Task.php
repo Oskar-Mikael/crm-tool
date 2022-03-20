@@ -35,4 +35,14 @@ class Task extends Model
     {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
+
+    public function type()
+    {
+        return $this->belongsTo(TaskType::class, 'task_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(TaskStatus::class, 'status_id');
+    }
 }

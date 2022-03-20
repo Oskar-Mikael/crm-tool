@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('priority')->nullable()->comment('Low Normal High Urgent');
-            $table->unsignedInteger('status')->nullable();
+            $table->unsignedInteger('status_id')->nullable();
             $table->unsignedInteger('type_id');
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
@@ -31,12 +31,12 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('status')->references('id')->on('task_statuses')->onDelete('set null');
-            $table->foreign('type_id')->references('id')->on('task_types');
-            $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('set null')->onDelete('set null');
-            $table->foreign('created_by_id')->references('id')->on('users');
-            $table->foreign('modified_by_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('assigned_user_id')->references('id')->on('users');
+            $table->index('status_id');
+            $table->index('type_id');
+            $table->index('customer_id');
+            $table->index('created_by_id');
+            $table->index('modified_by_id');
+            $table->index('assigned_user_id');
         });
     }
 
