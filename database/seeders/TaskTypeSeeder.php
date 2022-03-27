@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\TaskStatus;
+use App\Models\TaskType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +22,7 @@ class TaskTypeSeeder extends Seeder
         ]);
 
         $types->each(function ($type) {
-            TaskStatus::updateOrCreate($type);
+            TaskType::updateOrCreate($type);
         });
     }
 }
