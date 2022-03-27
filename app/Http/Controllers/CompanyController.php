@@ -9,6 +9,7 @@ class CompanyController extends Controller
     public function __construct()
     {
         return $this->middleware('auth');
+        return $this->middleware('company');
     }
 
     public function index()

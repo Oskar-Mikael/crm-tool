@@ -37,4 +37,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function redirectTo()
+    {
+        if (!auth()->user()->company_id) return '/setup';
+
+        return RouteServiceProvider::HOME;
+    }
 }
