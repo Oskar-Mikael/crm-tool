@@ -20,5 +20,15 @@ class TaskController extends Controller
 
         return view('tasks.show', compact('task'));
     }
+
+    public function create()
+    {
+        return view('tasks.create');
+    }
+
+    public function store()
+    {
+        return redirect()->back()->with('success', 'Task created');
+    }
 }
 

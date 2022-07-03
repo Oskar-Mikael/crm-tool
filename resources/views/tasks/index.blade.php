@@ -1,10 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row d-flex mt-4">
-        <h2 class="h2">
-            Tasks
-        </h2>
+    <div class="row mt-4">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2 class="h2">
+                    Tasks
+                </h2>
+            </div>
+            <div>
+                <a href="/tasks/create">
+                    <button class="btn btn-success">
+                        New task
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -24,7 +37,8 @@
             </thead>
             <tbody>
                 @foreach ($tasks as $task)
-                    <tr style="cursor: pointer" onclick="window.location='{{ route('task.show', $task->id) }}'">
+                    <tr class="{{ $task->priority == 'Urgent' ? 'bg-warning' : '' }}" style="cursor: pointer"
+                        onclick="window.location='{{ route('task.show', $task->id) }}'">
                         <td>
                             {{ $task->name }}
                         </td>

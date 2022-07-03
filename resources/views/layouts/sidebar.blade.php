@@ -53,12 +53,12 @@
                 <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
             </a>
             <a href="{{ route('task.index') }}"
-                class="{{ request()->routeIs('task.index') ? 'active' : '' }} list-group-item list-group-item-action py-2 ripple">
+                class="{{ request()->routeIs('task.*') ? 'active' : '' }} list-group-item list-group-item-action py-2 ripple">
                 <i class="fas fa-chart-area fa-fw me-3"></i><span>Tasks</span>
             </a>
             <a href="{{ route('customers.index') }}"
-                class="{{ request()->routeIs('customers.index') ? 'active' : '' }} list-group-item list-group-item-action py-2 ripple"><i
-                    class="fas fa-lock fa-fw me-3"></i><span>Customers</span></a>
+                class="{{ request()->routeIs('customers.*') ? 'active' : '' }} list-group-item list-group-item-action py-2 ripple"><i
+                    class="fas fa-user fa-fw me-3"></i><span>Customers</span></a>
             <a href="{{ route('customers.index') }}"
                 class="{{ request()->routeIs('customers.index') ? 'active' : '' }} list-group-item list-group-item-action py-2 ripple"><i
                     class="fas fa-lock fa-fw me-3"></i><span>Customers</span></a>
@@ -67,7 +67,7 @@
                     class="fas fa-lock fa-fw me-3"></i><span>Customers</span></a> <a
                 href="{{ route('company.settings') }}"
                 class="{{ request()->routeIs('company.settings') ? 'active' : '' }} list-group-item list-group-item-action py-2 ripple"><i
-                    class="fas fa-lock fa-fw me-3"></i><span>Settings</span></a>
+                    class="fas fa-gear fa-fw me-3"></i><span>Settings</span></a>
 
         </div>
     </div>

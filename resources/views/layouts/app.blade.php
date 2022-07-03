@@ -7,7 +7,12 @@
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+        integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -31,11 +36,6 @@
                 <div class="container">
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav me-auto">
-
-                        </ul>
-
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
@@ -52,6 +52,14 @@
                                     </li>
                                 @endif
                             @else
+                                <li class="nav-item dropdown my-auto mx-2">
+                                    <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa-solid fa-bell fa-lg"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown">
+                                    </div>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,7 +73,7 @@
                                         <a class="dropdown-item">
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                                 @csrf
-                                                    {{ __('Logout') }}
+                                                {{ __('Logout') }}
                                             </form>
                                         </a>
                                     </div>
@@ -75,13 +83,20 @@
                     </div>
                 </div>
             </nav>
+            @if (session()->has('success'))
+                <div class="bg-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
         @endauth
 
         <main class="py-4 container">
             @yield('content')
         </main>
-        <footer class="bg-light container mt-auto">
-            This is the footer
+        <footer class="position-absolute bg-secondary w-100" style="bottom: 0;min-height:100px">
+            <div class="container text-white mt-4">
+                This is the footer
+            </div>
         </footer>
     </div>
 </body>
