@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Middleware\CompanyMiddleware;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,24 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-
-Route::get('/setup', function () {
-    return view('setup.index');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/setup', function () {
+        return view('setup.index');
+    })->middleware('setup');
 
-Route::middleware('company')->group(function () {
-    Route::group(['prefix' => 'company'], function () {
-        Route::get('/', [CompanyController::class, 'index'])->name('company.index');
-    });
-    Route::group(['prefix' => 'customers'], function () {
-        Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
-        Route::get('{customer}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::middleware('company')->group(function () {
+        Route::resource('company', CompanyController::class, ['only' => ['index'], 'names' => 'company']);
+        Route::get('company/settings', [CompanyController::class, 'settings'])->name('company.settings');
+        Route::get('/', [CompanyController::class, 'index'])
+            ->name('index');
+        Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+        Route::resource('customers', CustomerController::class, ['only' => ['index', 'show'], 'names' => 'customers', 'parameters' => 'id']);
+        Route::resource('tasks', TaskController::class, ['only' => ['index', 'show'], 'names' => 'task', 'parameters' => 'id']);
     });
 });

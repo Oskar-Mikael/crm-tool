@@ -15,17 +15,6 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        Task::updateOrCreate([
-            'name' => 'Meet with nurse',
-            'priority' => 'Medium',
-            'status_id' => 1,
-            'type_id' => 2,
-            'start_date' => now()->toDateTimeString(),
-            'customer_type' => 'Customer',
-            'customer_id' => 1,
-            'description' => 'Make plans',
-            'created_by_id' => 1,
-            'assigned_user_id' => 1
-        ]);
+        
     }
 }

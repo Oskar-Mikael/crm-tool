@@ -38,11 +38,16 @@ class Task extends Model
 
     public function type()
     {
-        return $this->belongsTo(TaskType::class, 'task_id');
+        return $this->belongsTo(TaskType::class, 'type_id');
     }
 
     public function status()
     {
         return $this->belongsTo(TaskStatus::class, 'status_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }

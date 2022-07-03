@@ -15,7 +15,7 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        Company::updateOrCreate([
+        Company::factory()->hasTasks(3)->create([
             'name' => 'OskarAB',
             'email' => 'oskarab@gmail.com',
             'phone' => '93923716',

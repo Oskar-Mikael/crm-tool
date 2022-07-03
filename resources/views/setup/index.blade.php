@@ -1,1 +1,6 @@
-This is the setup for the company
+@extends('layouts.app')
+
+@section('content')
+<div>
+</div>
+@endsection

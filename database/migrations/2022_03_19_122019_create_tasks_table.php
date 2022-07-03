@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('complete_date')->nullable();
             $table->string('customer_type')->nullable()->comment('Lead Opportunity Customer Close');
             $table->unsignedInteger('customer_id')->nullable();
+            $table->unsignedInteger('company_id')->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('created_by_id');
             $table->unsignedInteger('modified_by_id')->nullable();
@@ -33,6 +34,7 @@ return new class extends Migration
 
             $table->index('status_id');
             $table->index('type_id');
+            $table->index('company_id');
             $table->index('customer_id');
             $table->index('created_by_id');
             $table->index('modified_by_id');

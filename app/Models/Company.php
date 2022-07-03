@@ -28,4 +28,9 @@ class Company extends Model
     {
         return $this->hasMany(Customer::class, 'company_id');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'company_id');
+    }
 }

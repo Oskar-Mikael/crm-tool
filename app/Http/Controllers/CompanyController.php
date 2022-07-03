@@ -8,14 +8,17 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('auth');
-        return $this->middleware('company');
     }
 
     public function index()
     {
         $company = auth()->user()->company;
 
-        return view('company.index', compact('company'));
+        return view('index', compact('company'));
+    }
+
+    public function settings()
+    {
+        return view('settings');
     }
 }
