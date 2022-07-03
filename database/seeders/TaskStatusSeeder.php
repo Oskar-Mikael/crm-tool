@@ -17,7 +17,7 @@ class TaskStatusSeeder extends Seeder
     {
         $statuses = collect([
             ['name' => 'draft'],
-            ['name' => 'in_progress'],
+            ['name' => 'in progress'],
             ['name' => 'done'],
             ['name' => 'archived']
         ]);

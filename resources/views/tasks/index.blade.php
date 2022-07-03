@@ -40,19 +40,28 @@
                     <tr class="{{ $task->priority == 'Urgent' ? 'bg-warning' : '' }}" style="cursor: pointer"
                         onclick="window.location='{{ route('task.show', $task->id) }}'">
                         <td>
+                            @if ($task->created_at <= \Carbon\Carbon::now()->addDays(7))
+                            <span class="badge rounded-pill bg-success">New</span>
+                            @endif
                             {{ $task->name }}
                         </td>
                         <td>
-                            {{ $task->priority ?? 'N/A' }}
+                            {{ ucFirst($task->priority) ?? 'N/A' }}
                         </td>
                         <td>
-                            {{ $task->status->name ?? 'N/A' }}
+                            {{ ucFirst($task->status->name) ?? 'N/A' }}
                         </td>
-                        <a href="{{ route('customers.show', $task->customer->id) }}">
+                        @if ($task->customer)
+                            <a href="{{ route('customers.show', $task->customer->id) }}">
+                                <td>
+                                    {{ $task->customer->first_name ?? 'N/A' }}
+                                </td>
+                            </a>
+                        @else
                             <td>
-                                {{ $task->customer->first_name ?? 'N/A' }}
+                                N/A
                             </td>
-                        </a>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

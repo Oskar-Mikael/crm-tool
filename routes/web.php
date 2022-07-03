@@ -31,5 +31,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
         Route::resource('customers', CustomerController::class, ['only' => ['index', 'show'], 'names' => 'customers', 'parameters' => 'id']);
         Route::resource('tasks', TaskController::class, ['only' => ['index', 'show', 'create', 'store'], 'names' => 'task', 'parameters' => 'id']);
+        Route::put('tasks/changeStatus/{task}', [TaskController::class, 'changeStatus'])->name('task.changeStatus');
     });
 });

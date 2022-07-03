@@ -29,8 +29,18 @@ class Company extends Model
         return $this->hasMany(Customer::class, 'company_id');
     }
 
-    public function tasks()
+    public function allTasks()
     {
         return $this->hasMany(Task::class, 'company_id');
+    }
+
+    public function tasks()
+    {
+        return $this->allTasks()->where('status_id', '!=', 4);
+    }
+
+    public function archivedTasks()
+    {
+        return $this->allTasks()->where('status_id', 4);
     }
 }

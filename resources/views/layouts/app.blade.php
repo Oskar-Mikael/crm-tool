@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
         integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <!-- CSRF Token -->
@@ -31,7 +31,7 @@
 <body>
     @auth
         @include('layouts.sidebar')
-        <div id="app" style="margin-left: 200px">
+        <div id="app" style="margin-left: 200px;min-height:100vh">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
 
@@ -55,9 +55,40 @@
                                 <li class="nav-item dropdown my-auto mx-2">
                                     <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa-solid fa-bell fa-lg"></i>
+
+                                        <i class="fa-solid fa-bell fa-lg">
+                                            @if (auth()->user()->unreadNotifications->isNotEmpty())
+                                                <span style="top:5%"
+                                                    class="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle">
+                                                </span>
+                                            @endif
+                                        </i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown">
+                                        @forelse (auth()->user()->unreadNotifications->take(10)
+            as $notification)
+                                            <a class="dropdown-item"
+                                                href="/{{ $notification->data['notification_type'] }}/{{ $notification->data['id'] }}">
+                                                @if (is_null($notification->read_at))
+                                                    <span style="top:5%"
+                                                        class="px-1 bg-primary border border-light rounded-circle">
+                                                    </span>
+                                                @endif
+                                                {{ $notification->data['message'] }}
+                                                {{ $notification->created_at }}
+                                            </a>
+                                            @empty
+                                            <p class="text-center my-auto">
+                                                No new notifications
+                                            </p>
+                                        @endforelse
+                                        @if (auth()->user()->unreadNotifications->count() > 10)
+                                            <div class="text-center">
+                                                <a href="/profile">
+                                                    View all notifications
+                                                </a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -84,8 +115,10 @@
                 </div>
             </nav>
             @if (session()->has('success'))
-                <div class="bg-success">
-                    {{ session()->get('success') }}
+                <div class="bg-success py-2">
+                    <div class="container text-white">
+                        {{ session()->get('success') }}
+                    </div>
                 </div>
             @endif
         @endauth

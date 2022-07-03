@@ -10,39 +10,67 @@
 @section('content')
     <div class="mb-4">
         <h2>
-            Create task
+            Create draft task
         </h2>
     </div>
     <div>
-        <form action="{{ route('task.store') }}">
+        <form action="{{ route('task.store') }}" method="post">
+            @csrf
             <div class="form-group mb-4">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Task name">
             </div>
 
             <div class="form-group mb-4">
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option selected hidden>--Priority--</option>
+                <select name="priority" class="form-control" id="exampleFormControlSelect1">
+                    <option value="0" selected hidden>--Priority--</option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                     <option value="urgent">Urgent</option>
                 </select>
             </div>
+            <div class="form-group mb-4">
+                <select name="type" class="form-control" id="exampleFormControlSelect1">
+                    <option value="0" selected hidden>--Task type--</option>
+                    @foreach (\App\Models\TaskType::all() as $type)
+                        <option value="{{ $type->id }}">{{ ucFirst($type->name) }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="mb-4">
                 <label>Start date</label>
-                <input type="text" id="startDate">
+                <input name="start_date" type="text" id="startDate">
             </div>
             <div class="mb-4">
                 <label>Deadline</label>
-                <input type="text" id="endDate">
+                <input name="end_date" type="text" id="endDate">
             </div>
             <div class="form-group mb-4">
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <select name="customer_id" class="form-control" id="exampleFormControlSelect1">
+                    <option value="0" selected hidden>--Customer--</option>
+                    @foreach (\App\Models\Customer::where('company_id', auth()->user()->company_id)->get() as $customer)
+                        <option value="{{ $customer->id }}"> {{ $customer->first_name }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <select name="assigned_user_id" class="form-control" id="exampleFormControlSelect1">
+                    <option value="0" selected hidden>--Assign to--</option>
+                    @foreach (\App\Models\User::where('company_id', auth()->user()->company_id)->get() as $user)
+                        <option value="{{ $user->id }}"> {{ $user->name }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <textarea name="description" placeholder="Description" style="resize: none" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="form-check mb-4">
+                <label class="form-check-label" for="exampleCheck1">
+                    Set in progress
+                    <input value="1" name="status" type="checkbox" class="form-check-input" id="exampleCheck1">
+                </label>
             </div>
 
             <div class="mt-2">

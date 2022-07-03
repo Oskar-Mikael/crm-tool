@@ -7,9 +7,9 @@
             bottom: 0;
             display: block;
             overflow-y: auto;
+            overflow-x: hidden;
             width: 100%;
             max-width: 200px;
-            padding-right: 1rem 0;
             left: 0;
             border-width: 0 1px 0 0;
             flex-flow: row nowrap;
