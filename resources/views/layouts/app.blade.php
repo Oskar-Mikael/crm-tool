@@ -31,7 +31,7 @@
 <body>
     @auth
         @include('layouts.sidebar')
-        <div id="app" style="margin-left: 200px;min-height:100vh">
+        <div id="app" style="">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
 

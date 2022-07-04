@@ -21,9 +21,6 @@
                         <th>
                             Status
                         </th>
-                        <th>
-                            Customer
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,9 +34,6 @@
                             </td>
                             <td>
                                 {{ $task->status->name ?? 'N/A' }}
-                            </td>
-                            <td>
-                                {{ $task->customer->first_name ?? 'N/A' }}
                             </td>
                         </tr>
                     @endforeach

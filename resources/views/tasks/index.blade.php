@@ -33,6 +33,9 @@
                     <th>
                         Customer
                     </th>
+                    <th>
+                        Deadline
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +65,12 @@
                                 N/A
                             </td>
                         @endif
+                        <td>
+                            {{ $task->end_date ?? 'N/A' }}
+                            @if ($task->end_date && $task->end_date < now())
+                            <span class="badge rounded-pill bg-danger">OVERDUE</span>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

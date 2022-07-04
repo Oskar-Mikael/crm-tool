@@ -10,6 +10,7 @@
             overflow-x: hidden;
             width: 100%;
             max-width: 200px;
+            z-index: 2;
             left: 0;
             border-width: 0 1px 0 0;
             flex-flow: row nowrap;

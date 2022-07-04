@@ -60,7 +60,7 @@
                                 New tasks
                             </h3>
                             <p class="h3">
-                                {{ $company->tasks->where('created_at', '<=', \Carbon\Carbon::now()->addDays(7))->count() }}
+                                {{ $company->openTasks->where('created_at', '<=', \Carbon\Carbon::now()->addDays(7))->count() }}
                             </p>
                         </div>
                     </div>

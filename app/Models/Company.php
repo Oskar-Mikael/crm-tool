@@ -43,4 +43,9 @@ class Company extends Model
     {
         return $this->allTasks()->where('status_id', 4);
     }
+
+    public function openTasks()
+    {
+        return $this->allTasks()->whereIn('status_id', [1,2]);
+    }
 }
